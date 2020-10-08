@@ -1,4 +1,7 @@
+import { Location } from '@angular/common';
+import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { MovieService } from '@cuevana-commons';
 
 @Component({
@@ -9,11 +12,15 @@ import { MovieService } from '@cuevana-commons';
 export class PortalHomeComponent implements OnInit {
   trending = [];
   rated = [];
-  popular = [];
+  popular: any = {};
 
-  constructor(private movieService: MovieService) { }
+  constructor(
+    private location: Location,
+    private activatedRoute: ActivatedRoute,
+    private movieService: MovieService
+  ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.movieService.trending().subscribe(res => {
       this.trending = res.results.slice(0, 7);
     });
@@ -22,8 +29,33 @@ export class PortalHomeComponent implements OnInit {
       this.rated = res.results.slice(0, 9);
     });
 
-    this.movieService.popular().subscribe(res => {
-      this.popular = res.results;
+    const page = this.activatedRoute.snapshot.queryParamMap.get('page');
+    this.goToPage(page || 1);
+  }
+
+  previousPage() {
+    if (this.popular.page > 1) {
+      this.goToPage(this.popular.page - 1);
+    }
+  }
+
+  nextPage() {
+    if (this.popular.page < this.popular.total_pages) {
+      this.goToPage(this.popular.page + 1);
+    }
+  }
+
+  goToPage(page) {
+    this.movieService.popular(page).subscribe(res => {
+      this.popular = res;
+
+      // Actualizamos la url
+      let params = new HttpParams();
+      if (page > 1) {
+        params = params.set('page', page);
+      }
+
+      this.location.go('/', params.toString());
     });
   }
 
