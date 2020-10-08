@@ -1,1 +1,55 @@
-<p>home works!</p>
+<div id="carousel-main" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item" *ngFor="let item of trending;let i=index" [class.active]="i == 0">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="carousel-container">
+                            <a>
+                                <div class="title">
+                                    {{item.title}}
+                                    <span
+                                        class="Qlty align-middle">{{item.media_type == 'movie'? 'PELICULA': 'SERIE'}}</span>
+                                </div>
+                            </a>
+                            <p class="Info">
+                                <span class="Vote">{{item.vote_average}}</span>
+                                <span class="Time">1h 56m</span>
+                                <span class="Date">{{item.release_date}}</span>
+                                <span class="Qlty">HD</span>
+                            </p>
+                            <p class="description">{{item.overview}}</p>
+                            <a class="btn btn-primary btn-lg btn-rounded">
+                                <i class="fa fa-play"></i> Ver Película
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <img src="https://image.tmdb.org/t/p/w1280{{item.backdrop_path}}" alt="">
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <ol class="carousel-indicators">
+                    <ng-container *ngFor="let item of trending;let i=index">
+                        <li data-target="#carousel-main" [attr.data-slide-to]="i" [class.active]="i == 0"></li>
+                    </ng-container>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="form-row">
+                <div class="col-sm-3 mb-3" *ngFor="let item of popular">
+                    <app-card-movie [movie]="item"></app-card-movie>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

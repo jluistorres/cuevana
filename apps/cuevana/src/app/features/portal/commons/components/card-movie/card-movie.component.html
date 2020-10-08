@@ -1,0 +1,14 @@
+<div class="post">
+  <a [routerLink]="['/detail', movie.id, movie.media_type || 'movie']">
+    <div class="image">
+      <span class="year">{{movie.release_date || movie.first_air_date || movie.air_date | date: 'yyyy'}}</span>
+      <figure>
+        <img class="thumbnail" [style.visibility]="movie.poster_path? 'visible' : 'hidden'"
+          [src]="movie.poster_path? 'https://image.tmdb.org/t/p/w185' + movie.poster_path: ''" alt="">
+      </figure>
+    </div>
+    <h2 class="title">
+      {{movie.title || movie.name}}
+    </h2>
+  </a>
+</div>
