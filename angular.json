@@ -17,7 +17,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/cuevana",
+            "outputPath": "dist/app",
+            "resourcesOutputPath": "resources",
             "index": "apps/cuevana/src/index.html",
             "main": "apps/cuevana/src/main.ts",
             "polyfills": "apps/cuevana/src/polyfills.ts",
@@ -170,7 +171,8 @@
           }
         }
       }
-    }},
+    }
+  },
   "cli": {
     "analytics": "8b12bdff-d29e-4229-9cdd-53a4a2a4a671"
   },
