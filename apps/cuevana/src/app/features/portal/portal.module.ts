@@ -6,6 +6,7 @@ import { PortalRoutingModule } from './portal-routing.module';
 import { PortalCategoryComponent } from './views/category/category.component';
 import { PortalCommonsModule } from './commons/commons.module';
 import { PortalDetailComponent } from './views/detail/detail.component';
+import { PortalAdultsComponent } from './views/adults/adults.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { PortalDetailComponent } from './views/detail/detail.component';
     PortalComponent,
     PortalHomeComponent,
     PortalCategoryComponent,
-    PortalDetailComponent
+    PortalDetailComponent,
+    PortalAdultsComponent
   ]
 })
 export class PortalModule { }

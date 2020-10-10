@@ -1,0 +1,73 @@
+.backdrop > .image,
+.backdrop > .image img {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 15%;
+    top: 0;
+    z-index: -1;
+}
+.backdrop > .image:after {
+    background: linear-gradient(to bottom, rgba(8, 15, 40, 0) 0%, rgba(8, 15, 40, 1) 100%);
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    pointer-events: none;
+}
+.backdrop > .image img {
+    object-position: 50% 50% !important;
+    opacity: 0.2;
+}
+.title {
+    font-size: 2.25rem;
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    line-height: 2rem;
+}
+.subtitle {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.5rem;
+    font-weight: 400;
+}
+.video-frame {
+    position: relative;
+    background-color: rgba(0, 0, 0, 1);
+    width: 100%;
+    height: 550px;
+    margin-top: 1.25rem;
+    cursor: pointer;
+}
+.video-frame::before {
+    font-family: FontAwesome;
+    content: "\f04b";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 5rem;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    z-index: 9;
+}
+
+// actores
+.card-img-top {
+    height: 175px;
+    background-color: rgb(187, 187, 187);
+}
+.card-img-top img {
+    height: 100%;
+    object-fit: cover;
+}
+.card-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
