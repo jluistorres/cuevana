@@ -19,7 +19,8 @@
                                 <span class="Qlty">HD</span>
                             </p>
                             <p class="description">{{item.overview}}</p>
-                            <a class="btn btn-primary btn-lg btn-rounded">
+                            <a class="btn btn-primary btn-lg btn-rounded"
+                                [routerLink]="['/detail', item.id, item.media_type]">
                                 <i class="fa fa-play"></i> Ver {{item.media_type == 'movie'? 'Película': 'Serie'}}
                             </a>
                         </div>
