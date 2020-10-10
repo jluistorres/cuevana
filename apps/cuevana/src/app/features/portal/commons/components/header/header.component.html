@@ -8,12 +8,17 @@
           </a>
         </figure>
         <div class="right">
-          <div class="search">
+          <div class="search" clickOut (clickOutside)="isShow = false">
             <form>
               <span class="form-icon">
-                <input type="text" name="s" placeholder="Buscar películas..." autocomplete="off">
+                <input #movieSearchInput type="text" name="s" placeholder="Buscar películas..." autocomplete="off"
+                  (focus)="isShow = true">
                 <button type="submit"><i class="fa fa-search"></i></button>
-                <!-- <div class="ep-autosuggest"></div> -->
+                <div class="ep-autosuggest" *ngIf="isShow && listSearch.length">
+                  <ng-container *ngFor="let item of listSearch">
+                    <app-card-movie-small [movie]="item"></app-card-movie-small>
+                  </ng-container>
+                </div>
               </span>
             </form>
           </div>

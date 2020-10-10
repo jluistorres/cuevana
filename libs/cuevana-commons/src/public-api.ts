@@ -4,3 +4,9 @@
 
 export * from './lib/http/http.module';
 export * from './lib/http/movies.service';
+
+export * from './lib/pipes/pipes.module';
+export * from './lib/pipes/runtime.pipe';
+
+export * from './lib/directives/directives.module';
+export * from './lib/directives/clickOut.directive';

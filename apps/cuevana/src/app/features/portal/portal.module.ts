@@ -5,6 +5,7 @@ import { PortalHomeComponent } from './views/home/home.component';
 import { PortalRoutingModule } from './portal-routing.module';
 import { PortalCategoryComponent } from './views/category/category.component';
 import { PortalCommonsModule } from './commons/commons.module';
+import { PortalDetailComponent } from './views/detail/detail.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { PortalCommonsModule } from './commons/commons.module';
   declarations: [
     PortalComponent,
     PortalHomeComponent,
-    PortalCategoryComponent
+    PortalCategoryComponent,
+    PortalDetailComponent
   ]
 })
 export class PortalModule { }

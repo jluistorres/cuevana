@@ -16,7 +16,7 @@
       <div class="title">{{details.title}}</div>
       <p class="Info">
         <span class="Vote">{{details.vote_average}}</span>
-        <span class="Time">{{details.runtime}}</span>
+        <span class="Time">{{details.runtime | runtime}}</span>
         <span class="Date">{{details.release_date | date: 'yyyy'}}</span>
         <span class="Qlty">HD</span>
       </p>

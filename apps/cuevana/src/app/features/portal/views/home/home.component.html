@@ -7,7 +7,7 @@
                         <div class="carousel-container">
                             <a>
                                 <div class="title">
-                                    {{item.title}}
+                                    {{item.title || item.name}}
                                     <span
                                         class="Qlty align-middle">{{item.media_type == 'movie'? 'PELICULA': 'SERIE'}}</span>
                                 </div>
@@ -20,7 +20,7 @@
                             </p>
                             <p class="description">{{item.overview}}</p>
                             <a class="btn btn-primary btn-lg btn-rounded">
-                                <i class="fa fa-play"></i> Ver Película
+                                <i class="fa fa-play"></i> Ver {{item.media_type == 'movie'? 'Película': 'Serie'}}
                             </a>
                         </div>
                     </div>

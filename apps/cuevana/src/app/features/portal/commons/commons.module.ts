@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from "@angular/core";
 import { RouterModule } from '@angular/router';
-import { CuevanaHttpModule } from '@cuevana-commons';
+import { CuevanaDirectivesModule, CuevanaHttpModule, CuevanaPipesModule } from '@cuevana-commons';
 import { CardMovieSmallComponent } from './components/card-movie-small/card-movie-small.component';
 import { CardMovieComponent } from './components/card-movie/card-movie.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -15,7 +15,9 @@ const components = [
 ];
 
 const modules = [
-    CuevanaHttpModule
+    CuevanaHttpModule,
+    CuevanaPipesModule,
+    CuevanaDirectivesModule
 ];
 
 @NgModule({

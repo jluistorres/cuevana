@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MovieService } from '@cuevana-commons';
+import { fromEvent } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -6,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+
+  @ViewChild('movieSearchInput', { static: true }) movieSearchInput: ElementRef;
 
   generos = [
     {
@@ -86,9 +91,37 @@ export class HeaderComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  listSearch = [];
+  isShow: boolean;
+
+  constructor(private movieService: MovieService) { }
 
   ngOnInit() {
+    fromEvent(this.movieSearchInput.nativeElement, 'keyup')
+      .pipe(
+        //Para obtener el valor del elemento
+        map((event: any) => {
+          return event.target.value
+        }),
+        //Para trabajar con textos mayor a 2 caracteres
+        filter(res => res.length > 2),
+        //Demore 1s
+        debounceTime(1000),
+        //El valor es diferente al anterior
+        distinctUntilChanged()
+      ).subscribe(text => {
+        this.movieService.search(text).subscribe(res => {
+          this.listSearch = res.results;
+        });
+      });
   }
+
+  /* search(event) {
+    const text = event.target.value;
+    this.movieService.search(text).subscribe(res => {
+      this.listSearch = res.results;
+    });
+    // console.log('keyup', event.target.value);
+  } */
 
 }
