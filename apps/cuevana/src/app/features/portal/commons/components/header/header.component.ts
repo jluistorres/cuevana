@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Event, NavigationStart, Router } from '@angular/router';
 import { MovieService } from '@cuevana-commons';
 import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
@@ -93,8 +94,13 @@ export class HeaderComponent implements OnInit {
 
   listSearch = [];
   isShow: boolean;
+  toggleMenu: boolean;
 
-  constructor(private movieService: MovieService) { }
+  constructor(
+    private movieService: MovieService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) { }
 
   ngOnInit() {
     fromEvent(this.movieSearchInput.nativeElement, 'keyup')
@@ -123,5 +129,27 @@ export class HeaderComponent implements OnInit {
     });
     // console.log('keyup', event.target.value);
   } */
+
+  toggle() {
+    this.toggleMenu = !this.toggleMenu;
+    if (this.toggleMenu) {
+      document.body.classList.add('open');
+    } else {
+      document.body.classList.remove('open');
+    }
+  }
+
+  events() {
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationStart) {
+        if (!this.toggleMenu) {
+          return;
+        }
+
+        this.toggleMenu = false;
+        document.body.classList.remove('open');
+      }
+    });
+  }
 
 }
