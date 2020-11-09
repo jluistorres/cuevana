@@ -2,7 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.0.
 
-<img src="https://imgur.com/euQUpS0" width="100%" />
+![Cuevana](https://i.imgur.com/euQUpS0.png)
 
 ## Development server
 
