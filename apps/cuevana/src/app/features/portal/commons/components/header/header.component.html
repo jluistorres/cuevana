@@ -1,0 +1,71 @@
+<header [class.open]="toggleMenu">
+  <div class="container">
+    <div class="row">
+      <div class="col d-flex align-items-center justify-content-between">
+        <figure class="logo">
+          <a routerLink="/">
+            <img src="https://cuevana3.io/wp-content/themes/cuevana3/public/img/cnt/cuevana3.png" alt="">
+          </a>
+        </figure>
+        <span class="MenuBtn" data-tgl="aa-wp" (click)="toggle()">
+          <i></i><i></i><i></i>
+        </span>
+        <div class="right">
+          <div class="search" clickOut (clickOutside)="isShow = false">
+            <form #frm="ngForm" (ngSubmit)="submit(frm.value)">
+              <span class="form-icon">
+                <input #movieSearchInput type="text" name="s" placeholder="Buscar películas..." autocomplete="off"
+                  (focus)="isShow = true" ngModel>
+                <button type="submit"><i class="fa fa-search"></i></button>
+                <div class="ep-autosuggest" *ngIf="isShow && listSearch.length">
+                  <ng-container *ngFor="let item of listSearch">
+                    <app-card-movie-small [movie]="item"></app-card-movie-small>
+                  </ng-container>
+                </div>
+              </span>
+            </form>
+          </div>
+          <div class="login">
+            <button class="btn btn-link" routerLink="/auth/sign-in">Entrar</button>
+            <button class="btn btn-primary">Registro</button>
+          </div>
+          <nav class="menu">
+            <ul class="clearfix">
+              <li class="menu-item">
+                <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</a>
+              </li>
+              <li class="menu-item has-children">
+                <a>Géneros</a>
+                <ul class="sub-menu">
+                  <li class="menu-item" *ngFor="let item of generos">
+                    <a [routerLink]="['/category', item.id]">{{item.name}}</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="menu-item has-children one-row">
+                <a>Películas</a>
+                <ul class="sub-menu">
+                  <li class="menu-item">
+                    <a routerLink="/estrenos">Estrenos</a>
+                  </li>
+                  <li class="menu-item">
+                    <a routerLink="/ranking">Ranking</a>
+                  </li>
+                  <li class="menu-item">
+                    <a routerLink="/mas-vistas">Más Vistas</a>
+                  </li>
+                  <li class="menu-item">
+                    <a routerLink="/peliculas">Películas</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="menu-item">
+                <a routerLink="/serie" routerLinkActive="active">Series</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

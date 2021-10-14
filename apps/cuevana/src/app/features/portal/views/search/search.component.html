@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2 class="mb-4">Palabras clave: {{keywords}}</h2>
+      <!-- <div class="row">
+        <div class="col-sm-3 col-6 mb-3" *ngFor="let item of movies.results">
+          <app-card-movie [movie]="item"></app-card-movie>
+        </div>
+      </div> -->
+      <app-list-movies [movies]="movies" (changePage)="search($event)"></app-list-movies>
+    </div>
+  </div>
+</div>
+

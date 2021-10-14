@@ -1,0 +1,41 @@
+<div class="post" (mouseenter)="enter()" (mouseleave)="leave()">
+  <a [routerLink]="['/detail', movie.id, movie.media_type || 'movie']">
+    <div class="image">
+      <span class="year">{{movie.release_date || movie.first_air_date || movie.air_date | date: 'yyyy'}}</span>
+      <figure>
+        <img class="thumbnail" [style.visibility]="movie.poster_path? 'visible' : 'hidden'"
+          [src]="movie.poster_path? 'https://image.tmdb.org/t/p/w185' + movie.poster_path: ''" alt="">
+      </figure>
+    </div>
+    <h2 class="title">
+      {{movie.title || movie.name}}
+    </h2>
+  </a>
+  <div class="details" *ngIf="movie.title">
+    <ng-container *ngIf="details; else loading">
+      <div class="title">{{details.title}}</div>
+      <p class="Info">
+        <span class="Vote">{{details.vote_average}}</span>
+        <span class="Time">{{details.runtime | runtime}}</span>
+        <span class="Date">{{details.release_date | date: 'yyyy'}}</span>
+        <span class="Qlty">HD</span>
+      </p>
+      <div class="description">
+        <p>{{details.overview}}</p>
+      </div>
+      <p class="genre">
+        <span class="mr-2 text-light">Género:</span>
+        <ng-container *ngFor="let g of details.genres; let j = index">
+          <ng-container *ngIf="j != 0">, </ng-container>
+          {{g.name}}
+        </ng-container>
+      </p>
+    </ng-container>
+    <ng-template #loading>
+      <div class="text-center pt-5 pb-5">
+        <i class="fa fa-spin fa-circle-o-notch fa-3x"></i>
+      </div>
+    </ng-template>
+    <img class="bg" [src]="'https://image.tmdb.org/t/p/w92' + movie.poster_path" alt="">
+  </div>
+</div>

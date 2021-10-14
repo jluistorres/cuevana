@@ -1,0 +1,122 @@
+<div id="carousel-main" class="carousel slide" data-ride="carousel" data-interval="5000"
+  [class.d-none]="isLoadingTrend">
+  <div class="carousel-inner">
+    <div class="carousel-item" *ngFor="let item of trending;let i=index" [class.active]="i == 0"
+      (dragstart)="dragstart($event)" (dragend)="dragend($event)" draggable="true">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="carousel-container">
+              <a>
+                <div class="title">
+                  {{item.title || item.name}}
+                  <span class="Qlty align-middle">{{item.media_type == 'movie'? 'PELÍCULA': 'SERIE'}}</span>
+                </div>
+              </a>
+              <p class="Info">
+                <span class="Vote">{{item.vote_average}}</span>
+                <span class="Time">1h 56m</span>
+                <span class="Date">{{item.release_date | date: 'yyyy'}}</span>
+                <span class="Qlty">HD</span>
+              </p>
+              <p class="description">{{item.overview}}</p>
+              <a class="btn btn-primary btn-lg btn-rounded" [routerLink]="['/detail', item.id, item.media_type]">
+                <i class="fa fa-play"></i> Ver {{item.media_type == 'movie'? 'Película': 'Serie'}}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <img src="https://image.tmdb.org/t/p/w1280{{item.backdrop_path}}" alt="" draggable="false">
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <ol class="carousel-indicators">
+          <ng-container *ngFor="let item of trending;let i=index">
+            <li data-target="#carousel-main" [attr.data-slide-to]="i" [class.active]="i == 0"></li>
+          </ng-container>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-container *ngIf="isLoadingTrend">
+  <app-skeleton height="475px" class="mb-3"></app-skeleton>
+</ng-container>
+<!-- Sections -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <section class="home-movies">
+        <div class="Top">
+          <h2 class="Title">Películas Online</h2>
+          <div class="btnstp">
+            <a data-tab="tab-1" class="Button STPb Current">ÚLTIMAS</a>
+            <a data-tab="tab-2" class="Button STPb">ESTRENOS</a>
+            <a data-tab="tab-3" class="Button STPb">RANKING</a>
+            <a data-tab="tab-4" class="Button STPb">MAS VISTAS</a>
+          </div>
+        </div>
+      </section>
+      <div class="tab">
+        <div class="form-row" *ngIf="!isLoadingPopular">
+          <div class="col-sm-3 col-6 mb-3" *ngFor="let item of popular.results">
+            <app-card-movie [movie]="item"></app-card-movie>
+          </div>
+        </div>
+        <ng-container *ngIf="isLoadingPopular">
+          <div class="form-row">
+            <div class="col-sm-3 col-6 mb-3" *ngFor="let item of [].constructor(12)">
+              <app-skeleton height="298px" radius="0.5em"></app-skeleton>
+              <div class="text-center mt-3">
+                <app-skeleton height="15px" radius="0.5em" class="w-75 d-inline-block"></app-skeleton>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <nav class="navigation pagination">
+          <div class="nav-links">
+            <a class="prev page-numbers" (click)="previousPage()">
+              <i class="fa fa-arrow-left"></i>
+            </a>
+            <!-- <a class="page-link">1</a> -->
+            <a class="page-link current">{{popular.page || 1}}</a>
+            <!-- <a class="page-link">3</a>
+          <a class="page-link">4</a> -->
+            <span class="extend">...</span>
+            <a class="page-link" (click)="goToPage(popular.total_pages)">{{popular.total_pages || 1}}</a>
+            <a class="next page-numbers" (click)="nextPage()">
+              <i class="fa fa-arrow-right"></i>
+            </a>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="widget-title">TOP ESTRENOS</div>
+      <ul class="MovieList top">
+        <ng-container *ngIf="!isLoadingRated">
+          <li class="mb-3" *ngFor="let item of rated">
+            <app-card-movie-small [movie]="item"></app-card-movie-small>
+          </li>
+        </ng-container>
+        <ng-container *ngIf="isLoadingRated">
+          <li class="mb-3" *ngFor="let item of [].constructor(8)">
+            <div class="form-row">
+              <div class="col-4">
+                <app-skeleton height="80px" radius="0.5em"></app-skeleton>
+              </div>
+              <div class="col">
+                <app-skeleton height="20px" radius="0.5em"></app-skeleton>
+                <app-skeleton height="20px" radius="0.5em" class="mt-3"></app-skeleton>
+              </div>
+            </div>
+
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </div>
+</div>

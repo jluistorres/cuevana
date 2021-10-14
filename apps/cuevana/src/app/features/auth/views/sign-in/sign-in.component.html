@@ -1,0 +1,62 @@
+<div class="login">
+  <div class="login-left">    
+  </div>
+  <div class="login-right">
+    <form [formGroup]="form" class="login-form">
+      <h3 class="title">
+        Iniciar Sesión
+      </h3>
+      <p class="description">Ingresa y conoce nuestra experiencia web.</p>
+      <ng-container *ngIf="!isValid">
+        <div class="form-group">
+          <label for="">Tipo de documento *</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="fa fa-id-card-o"></i>
+              </div>
+            </div>
+            <select class="form-control" formControlName="tipodoc">
+              <option value="DNI">DNI</option>
+              <option value="CE">Carnet de Extranjería</option>
+              <option value="PSP">Pasaporte</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="">Número de documento *</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="fa fa-hashtag"></i>
+              </div>
+            </div>
+            <input type="text" class="form-control textfield" formControlName="numdoc"
+              [class.is-invalid]="form.get('numdoc').errors && form.get('numdoc').touched"
+              [maxlength]="form.get('tipodoc').value == 'DNI'?8:15" (keypress)="validarNumeros($event)"
+              (keyup.enter)="validar()">
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="isValid">
+        <div class="form-group">
+          <label for="">Password *</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="fa fa-key"></i>
+              </div>
+            </div>
+            <input #pwdInput type="password" class="form-control" formControlName="password" (keyup.enter)="validar()">
+          </div>
+        </div>
+      </ng-container>
+
+      <button class="btn btn-warning btn-block mt-5" (click)="validar()" [disabled]="form.invalid || isLoading"
+        [class.btn-light]="form.invalid">
+        <i class="fa fa-spin fa-circle-o-notch" *ngIf="isLoading"></i>
+        {{isValid?'Ingresar': 'Siguiente'}}
+      </button>
+    </form>
+  </div>
+</div>

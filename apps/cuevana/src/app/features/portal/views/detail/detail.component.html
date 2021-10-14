@@ -1,0 +1,67 @@
+<div class="backdrop">
+  <div class="image">
+    <figure>
+      <img src="https://image.tmdb.org/t/p/w1280{{movie.backdrop_path}}" alt="">
+    </figure>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="row">
+          <div class="col-auto">
+            <figure>
+              <img class="thumbnail" [style.visibility]="movie.poster_path? 'visible' : 'hidden'"
+                [src]="movie.poster_path? 'https://image.tmdb.org/t/p/w185' + movie.poster_path: ''" alt="">
+            </figure>
+          </div>
+          <div class="col-9">
+            <h1 class="title">{{movie.title || movie.name}}</h1>
+            <h6 class="subtitle">{{movie.tagline}}</h6>
+            <p class="Info">
+              <span class="Vote">{{movie.vote_average}}</span>
+              <span class="Time" *ngIf="movie.runtime">{{movie.runtime | runtime}}</span>
+              <span class="Date">{{movie.release_date || movie.first_air_date | date: 'yyyy'}}</span>
+              <span class="Qlty">HD</span>
+            </p>
+            <div class="description">
+              <p>{{movie.overview}}</p>
+            </div>
+            <p class="genre" *ngIf="movie.genres?.length">
+              <span class="mr-2 text-light">Género:</span>
+              <ng-container *ngFor="let g of movie.genres; let j = index">
+                <ng-container *ngIf="j != 0">, </ng-container>
+                <span>{{g.name}}</span>
+              </ng-container>
+            </p>
+          </div>
+        </div>
+        <ng-container *ngIf="movie.seasons; else view">
+          <h4 class="mb-3">Temporadas</h4>
+          <div class="row">
+            <div class="col-sm-3" *ngFor="let item of movie.seasons">
+              <app-card-movie [movie]="item"></app-card-movie>
+            </div>
+          </div>
+        </ng-container>
+        <ng-template #view>
+          <div class="video-frame"></div>
+        </ng-template>
+        <h3 class="mt-4 mb-3">Actores principales</h3>
+        <div class="form-row">
+          <div class="col-sm-6 col-md-2 mb-3" *ngFor="let item of actors">
+            <div class="card">
+              <div class="card-img-top">
+                <img class="w-100" *ngIf="item.profile_path" src="https://image.tmdb.org/t/p/w138_and_h175_face{{item.profile_path}}" alt="">
+              </div>
+              <div class="card-body">
+                <div class="card-title">{{item.name}}</div>
+                <small>{{item.character}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

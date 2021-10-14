@@ -1,0 +1,52 @@
+{
+  "name": "cuevana",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build --configuration production --base-href /cuevana/ --deploy-url /cuevana/app/",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "~12.2.8",
+    "@angular/common": "~12.2.8",
+    "@angular/compiler": "~12.2.8",
+    "@angular/core": "~12.2.8",
+    "@angular/forms": "~12.2.8",
+    "@angular/platform-browser": "~12.2.8",
+    "@angular/platform-browser-dynamic": "~12.2.8",
+    "@angular/router": "~12.2.8",
+    "animate.css": "^3.7.2",
+    "bootstrap": "^4.5.2",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1",
+    "rxjs": "~6.6.0",
+    "tslib": "^2.0.0",
+    "zone.js": "~0.11.4"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~12.2.8",
+    "@angular/cli": "~12.2.8",
+    "@angular/compiler-cli": "~12.2.8",
+    "@types/node": "^12.11.1",
+    "@types/jasmine": "~3.6.0",
+    "@types/jasminewd2": "~2.0.3",
+    "codelyzer": "^6.0.0",
+    "jasmine-core": "~3.6.0",
+    "jasmine-spec-reporter": "~5.0.0",
+    "karma": "~6.3.4",
+    "karma-chrome-launcher": "~3.1.0",
+    "karma-coverage-istanbul-reporter": "~3.0.2",
+    "karma-jasmine": "~4.0.0",
+    "karma-jasmine-html-reporter": "^1.5.0",
+    "ng-packagr": "^12.2.2",
+    "protractor": "~7.0.0",
+    "ts-node": "~8.3.0",
+    "tslint": "~6.1.0",
+    "typescript": "~4.3.5"
+  }
+}
