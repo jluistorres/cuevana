@@ -4,7 +4,7 @@
       <h2 class="mb-4">Categoría</h2>
       <app-list-movies [movies]="movies" (changePage)="search($event)" *ngIf="!isLoading"></app-list-movies>
       <div class="row" *ngIf="isLoading">
-        <div class="col-sm-3 col-6 mb-3" *ngFor="let item of [].constructor(8)">
+        <div class="col-md-3 col-6 mb-3" *ngFor="let item of [].constructor(8)">
           <app-skeleton height="382px"></app-skeleton>
         </div>
       </div>

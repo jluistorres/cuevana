@@ -27,7 +27,7 @@
               <p>{{movie.overview}}</p>
             </div>
             <p class="genre" *ngIf="movie.genres?.length">
-              <span class="mr-2 text-light">Género:</span>
+              <span class="me-2 text-light">Género:</span>
               <ng-container *ngFor="let g of movie.genres; let j = index">
                 <ng-container *ngIf="j != 0">, </ng-container>
                 <span>{{g.name}}</span>
@@ -46,20 +46,25 @@
         <ng-template #view>
           <div class="video-frame"></div>
         </ng-template>
-        <h3 class="mt-4 mb-3">Actores principales</h3>
-        <div class="form-row">
-          <div class="col-sm-6 col-md-2 mb-3" *ngFor="let item of actors">
-            <div class="card">
-              <div class="card-img-top">
-                <img class="w-100" *ngIf="item.profile_path" src="https://image.tmdb.org/t/p/w138_and_h175_face{{item.profile_path}}" alt="">
-              </div>
-              <div class="card-body">
-                <div class="card-title">{{item.name}}</div>
-                <small>{{item.character}}</small>
+
+        <ng-container *ngIf="actors.length">
+          <h3 class="mt-4 mb-3">Actores principales</h3>
+          <div class="row align-items-stretch">
+            <div class="col-sm-6 col-md-2 mb-3" *ngFor="let item of actors">
+              <div class="card h-100 overflow-hidden">
+                <div class="card-img-top">
+                  <img class="w-100" *ngIf="item.profile_path"
+                    src="https://image.tmdb.org/t/p/w138_and_h175_face{{item.profile_path}}" alt="">
+                </div>
+                <div class="card-body">
+                  <div class="card-title">{{item.name}}</div>
+                  <small>{{item.character}}</small>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </ng-container>
+
       </div>
     </div>
   </div>

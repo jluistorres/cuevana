@@ -1,20 +1,16 @@
 <div class="login">
-  <div class="login-left">    
+  <div class="login-left">
   </div>
   <div class="login-right">
-    <form [formGroup]="form" class="login-form">
-      <h3 class="title">
-        Iniciar Sesión
-      </h3>
+    <form [formGroup]="form" class="login-form">      
+      <h3 class="title">Iniciar Sesión</h3>
       <p class="description">Ingresa y conoce nuestra experiencia web.</p>
       <ng-container *ngIf="!isValid">
         <div class="form-group">
           <label for="">Tipo de documento *</label>
           <div class="input-group">
-            <div class="input-group-prepend">
-              <div class="input-group-text">
-                <i class="fa fa-id-card-o"></i>
-              </div>
+            <div class="input-group-text">
+              <i class="fa fa-id-card-o"></i>
             </div>
             <select class="form-control" formControlName="tipodoc">
               <option value="DNI">DNI</option>
@@ -26,10 +22,8 @@
         <div class="form-group">
           <label for="">Número de documento *</label>
           <div class="input-group">
-            <div class="input-group-prepend">
-              <div class="input-group-text">
-                <i class="fa fa-hashtag"></i>
-              </div>
+            <div class="input-group-text">
+              <i class="fa fa-hashtag"></i>
             </div>
             <input type="text" class="form-control textfield" formControlName="numdoc"
               [class.is-invalid]="form.get('numdoc').errors && form.get('numdoc').touched"
@@ -42,10 +36,8 @@
         <div class="form-group">
           <label for="">Password *</label>
           <div class="input-group">
-            <div class="input-group-prepend">
-              <div class="input-group-text">
-                <i class="fa fa-key"></i>
-              </div>
+            <div class="input-group-text">
+              <i class="fa fa-key"></i>
             </div>
             <input #pwdInput type="password" class="form-control" formControlName="password" (keyup.enter)="validar()">
           </div>

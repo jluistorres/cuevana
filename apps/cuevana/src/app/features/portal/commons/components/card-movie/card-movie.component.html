@@ -24,7 +24,7 @@
         <p>{{details.overview}}</p>
       </div>
       <p class="genre">
-        <span class="mr-2 text-light">Género:</span>
+        <span class="me-2 text-light">Género:</span>
         <ng-container *ngFor="let g of details.genres; let j = index">
           <ng-container *ngIf="j != 0">, </ng-container>
           {{g.name}}

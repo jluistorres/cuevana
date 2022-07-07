@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieService } from '@cuevana-commons';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-category',
@@ -27,10 +28,14 @@ export class PortalCategoryComponent implements OnInit {
   search(page: number) {
     this.isLoading = true;
     this.movieService.discover({ with_genres: this.id, page })
-      .subscribe(res => {
-        this.movies = res;
-        this.isLoading = false;
-      }, () => this.isLoading = false);
+      .pipe(delay(2000))
+      .subscribe({
+        next: res => {
+          this.movies = res;
+          this.isLoading = false;
+        },
+        error: () => this.isLoading = false
+      });
   }
 
 }

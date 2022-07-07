@@ -38,10 +38,13 @@ export class HomeComponent implements OnInit {
       .pipe(
         delay(2000)
       )
-      .subscribe(res => {
-        this.trending = res.results.slice(0, 7);
-        this.isLoadingTrend = false;
-      }, () => this.isLoadingTrend = false);
+      .subscribe({
+        next: res => {
+          this.trending = res.results.slice(0, 7);
+          this.isLoadingTrend = false;
+        },
+        error: () => this.isLoadingTrend = false
+      });
   }
 
   ratedMovies(): void {
@@ -50,10 +53,13 @@ export class HomeComponent implements OnInit {
       .pipe(
         delay(2000)
       )
-      .subscribe(res => {
-        this.rated = res.results.slice(0, 9);
-        this.isLoadingRated = false;
-      }, () => this.isLoadingRated = false);
+      .subscribe({
+        next: res => {
+          this.rated = res.results.slice(0, 9);
+          this.isLoadingRated = false;
+        },
+        error: () => this.isLoadingRated = false
+      });
   }
 
   previousPage(): void {
@@ -74,17 +80,20 @@ export class HomeComponent implements OnInit {
       .pipe(
         delay(2000)
       )
-      .subscribe(res => {
-        this.popular = res;
-        let params = new HttpParams();
-        if (page > 1) {
-          params = params.set('page', page);
-        }
+      .subscribe({
+        next: res => {
+          this.popular = res;
+          let params = new HttpParams();
+          if (page > 1) {
+            params = params.set('page', page);
+          }
 
-        this.location.go('/', params.toString());
+          this.location.go('/', params.toString());
 
-        this.isLoadingPopular = false;
-      }, () => this.isLoadingPopular = false);
+          this.isLoadingPopular = false;
+        },
+        error: () => this.isLoadingPopular = false
+      });
   }
 
   dragstart(event): void {

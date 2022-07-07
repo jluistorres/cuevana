@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,13 +8,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./sign-in.component.scss']
 })
 export class AuthSignInComponent implements OnInit {
-  form: FormGroup;
+  form: UntypedFormGroup;
   isValid: boolean;
   isLoading: boolean;
   @ViewChild('pwdInput', { static: false }) pwdInput: ElementRef;
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     // private sesionService: SesionService,
     private router: Router,
     private cRef: ChangeDetectorRef

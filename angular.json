@@ -28,15 +28,11 @@
               "apps/cuevana/src/favicon.ico",
               "apps/cuevana/src/assets"
             ],
-            "styles": [
-              "./node_modules/bootstrap/dist/css/bootstrap.css",
-              "./node_modules/font-awesome/css/font-awesome.css",
-              "./node_modules/animate.css/animate.min.css",
+            "styles": [              
               "apps/cuevana/src/styles.scss"
             ],
             "scripts": [
-              "./node_modules/jquery/dist/jquery.min.js",
-              "./node_modules/popper.js/dist/umd/popper.min.js",
+              "./node_modules/@popperjs/core/dist/umd/popper.min.js",
               "./node_modules/bootstrap/dist/js/bootstrap.min.js"
             ],
             "vendorChunk": true,
@@ -181,6 +177,5 @@
   },
   "cli": {
     "analytics": "ae81e316-8df7-4ba2-ade1-7eaa4b6e950e"
-  },
-  "defaultProject": "cuevana"
+  }
 }
