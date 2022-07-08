@@ -15,7 +15,7 @@
             </figure>
           </div>
           <div class="col-9">
-            <h1 class="title">{{movie.title || movie.name}}</h1>
+            <h1 class="title_movie">{{movie.title || movie.name}}</h1>
             <h6 class="subtitle">{{movie.tagline}}</h6>
             <p class="Info">
               <span class="Vote">{{movie.vote_average}}</span>
@@ -27,10 +27,17 @@
               <p>{{movie.overview}}</p>
             </div>
             <p class="genre" *ngIf="movie.genres?.length">
-              <span class="me-2 text-light">Género:</span>
+              <span class="me-2">Género:</span>
               <ng-container *ngFor="let g of movie.genres; let j = index">
                 <ng-container *ngIf="j != 0">, </ng-container>
-                <span>{{g.name}}</span>
+                <span class="text-light">{{g.name}}</span>
+              </ng-container>
+            </p>
+            <p class="actors" *ngIf="actors.length">
+              <span class="me-2">Actores:</span>
+              <ng-container *ngFor="let item of actors | slice: 0:10; let j = index">
+                <ng-container *ngIf="j != 0">, </ng-container>
+                <span class="text-light">{{item.name}}</span>
               </ng-container>
             </p>
           </div>
@@ -38,19 +45,47 @@
         <ng-container *ngIf="movie.seasons; else view">
           <h4 class="mb-3">Temporadas</h4>
           <div class="row">
-            <div class="col-sm-3" *ngFor="let item of movie.seasons">
-              <app-card-movie [movie]="item"></app-card-movie>
+            <div class="col-md-2" *ngFor="let item of movie.seasons">
+              <!-- <app-card-movie [movie]="item"></app-card-movie> -->
+              <div class="post">
+                <a>
+                  <div class="image">
+                    <span class="year">
+                      {{movie.release_date || movie.first_air_date || movie.air_date | date: 'yyyy'}}
+                    </span>
+                    <figure>
+                      <img class="thumbnail" [style.visibility]="movie.poster_path? 'visible' : 'hidden'"
+                        [src]="movie.poster_path? 'https://image.tmdb.org/t/p/w185' + movie.poster_path: ''" alt="">
+                    </figure>
+                  </div>
+                  <h2 class="title">
+                    {{movie.title || movie.name}}
+                  </h2>
+                </a>
+              </div>
             </div>
           </div>
         </ng-container>
         <ng-template #view>
+          <ul class="TPlayerNv">
+            <li class="open_submenu actives" data-number="">
+              <div>
+                <img src="https://cuevana3.rip/wp-content/themes/cuevana/assets/img/latino.svg" alt="LATINO">
+                <div>
+                  <div class="">LATINO</div>
+                  <strong class="small text-light">CALIDAD HD</strong>
+                </div>
+                <div class="fa fa-chevron-down"></div>
+              </div>
+            </li>
+          </ul>
           <div class="video-frame"></div>
         </ng-template>
 
         <ng-container *ngIf="actors.length">
           <h3 class="mt-4 mb-3">Actores principales</h3>
           <div class="row align-items-stretch">
-            <div class="col-sm-6 col-md-2 mb-3" *ngFor="let item of actors">
+            <div class="col-sm-6 col-md-2 mb-3" *ngFor="let item of actors | slice: 0:6">
               <div class="card h-100 overflow-hidden">
                 <div class="card-img-top">
                   <img class="w-100" *ngIf="item.profile_path"

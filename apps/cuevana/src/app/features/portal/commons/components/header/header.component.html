@@ -14,12 +14,14 @@
           <div class="search" clickOut (clickOutside)="isShow = false">
             <form #frm="ngForm" (ngSubmit)="submit(frm.value)">
               <span class="form-icon">
-                <input #movieSearchInput type="text" name="s" placeholder="Buscar películas..." autocomplete="off"
-                  (focus)="isShow = true" ngModel>
+                <input type="text" name="s" placeholder="Buscar películas..." autocomplete="off" (focus)="isShow = true"
+                  [formControl]="searchControl">
                 <button type="submit"><i class="fa fa-search"></i></button>
-                <div class="ep-autosuggest" *ngIf="isShow && listSearch.length">
-                  <ng-container *ngFor="let item of listSearch">
-                    <app-card-movie-small [movie]="item"></app-card-movie-small>
+                <div class="ep-autosuggest" *ngIf="isShow && listSearch.length || isLoadingSearch">
+                  <div class="p-2" *ngIf="isLoadingSearch">Buscando...</div>
+                  <ng-container *ngIf="!isLoadingSearch">
+                    <app-card-movie-small *ngFor="let item of listSearch" [movie]="item">
+                    </app-card-movie-small>
                   </ng-container>
                 </div>
               </span>

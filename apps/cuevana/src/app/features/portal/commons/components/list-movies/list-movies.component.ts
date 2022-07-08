@@ -7,6 +7,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class ListMoviesComponent implements OnInit {
   @Input() movies: any = {};
+  @Input() isLoading: boolean = false;
   @Output() changePage: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
@@ -26,19 +27,9 @@ export class ListMoviesComponent implements OnInit {
     }
   }
 
-  goToPage(page) {
-    console.log(`Change page ${page}`);
+  goToPage(page: number) {
+    this.movies.page = page;
     this.changePage.emit(page);
-
-    /* this.movieService.popular(page).subscribe(res => {
-      this.movies = res;
-      // let params = new HttpParams();
-      // if (page > 1) {
-      //   params = params.set('page', page);
-      // }
-
-      // this.location.go('/', params.toString());
-    }); */
   }
 
 }

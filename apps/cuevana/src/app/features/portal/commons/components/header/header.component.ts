@@ -1,8 +1,9 @@
 import { Component, ElementRef, HostBinding, HostListener, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { NavigationStart, Router, Event, ActivatedRoute } from '@angular/router';
 import { MovieService } from '@cuevana-commons';
-import { fromEvent } from 'rxjs';
-import { map, filter, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { fromEvent, of, throwError } from 'rxjs';
+import { map, filter, debounceTime, distinctUntilChanged, switchMap, catchError, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -10,90 +11,11 @@ import { map, filter, debounceTime, distinctUntilChanged } from 'rxjs/operators'
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  searchControl = new FormControl();
 
-  @ViewChild('movieSearchInput', { static: true }) movieSearchInput: ElementRef;
-
-  // generos = [];
-  generos = [
-    {
-      "id": 28,
-      "name": "Acción"
-    },
-    {
-      "id": 12,
-      "name": "Aventura"
-    },
-    {
-      "id": 16,
-      "name": "Animación"
-    },
-    {
-      "id": 35,
-      "name": "Comedia"
-    },
-    {
-      "id": 80,
-      "name": "Crimen"
-    },
-    {
-      "id": 99,
-      "name": "Documental"
-    },
-    {
-      "id": 18,
-      "name": "Drama"
-    },
-    {
-      "id": 10751,
-      "name": "Familia"
-    },
-    {
-      "id": 14,
-      "name": "Fantasía"
-    },
-    {
-      "id": 36,
-      "name": "Historia"
-    },
-    {
-      "id": 27,
-      "name": "Terror"
-    },
-    {
-      "id": 10402,
-      "name": "Música"
-    },
-    {
-      "id": 9648,
-      "name": "Misterio"
-    },
-    {
-      "id": 10749,
-      "name": "Romance"
-    },
-    {
-      "id": 878,
-      "name": "Ciencia ficción"
-    },
-    {
-      "id": 10770,
-      "name": "Película de TV"
-    },
-    {
-      "id": 53,
-      "name": "Suspense"
-    },
-    {
-      "id": 10752,
-      "name": "Bélica"
-    },
-    {
-      "id": 37,
-      "name": "Western"
-    }
-  ];
-
+  generos = [];
   listSearch = [];
+  isLoadingSearch: boolean;
   isShow: boolean;
   toggleMenu: boolean;
 
@@ -104,43 +26,43 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.generos = this.activatedRoute.snapshot.data.genres || [];
+    this.generos = this.activatedRoute.snapshot.data.genres || [];
 
-    fromEvent(this.movieSearchInput.nativeElement, 'keyup').pipe(
+    this.searchControl.valueChanges
+      .pipe(
+        tap(() => {
+          this.listSearch = [];
+          this.isLoadingSearch = false;          
+        })
 
-      // get value
-      map((event: any) => {
-        return event.target.value;
-      })
-      // if character length greater then 2
-      , filter(res => res.length > 2)
+        // Si la longitud del carácter es mayor que 1
+        , filter(value => value.length > 1)
 
-      // Time in milliseconds between key events
-      , debounceTime(1000)
+        , tap(() => this.isLoadingSearch = true)
 
-      // If previous query is diffent from current   
-      , distinctUntilChanged()
+        // Tiempo en milisegundos entre eventos clave
+        , debounceTime(1000)
 
-      // subscription for response
-    ).subscribe(text => {
-      this.movieService.search(text).subscribe(res => {
-        this.listSearch = res.results;
+        // Si la consulta anterior es diferente de la actual 
+        , distinctUntilChanged()
+
+        // Cambiamos el observable a retornar
+        , switchMap(value => {
+          return this.movieService.search(value)
+            .pipe(
+              map(res => res.results),
+              catchError(() => of([]))
+            )
+        })
+
+        // subscription for response
+      ).subscribe((res: any[]) => {
+        this.isLoadingSearch = false;
+        this.listSearch = res;
       });
-    });
 
     this.events();
   }
-
-  /* search(event) {
-    const key = event.target.value;
-    if (key?.length < 3) {
-      return;
-    }
-
-    this.movieService.search(key).subscribe(res => {
-      this.listSearch = res.results;
-    });
-  } */
 
   submit(form) {
     console.log(form);

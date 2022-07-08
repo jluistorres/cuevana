@@ -1,12 +1,13 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'apps/cuevana/src/environments/environment';
 import { Observable, timer } from 'rxjs';
 import { delay, map, switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class MovieService {
-    apiKey = 'f70167de410d875907d6a40df4b45cb2';
-    endpoint = 'https://api.themoviedb.org/3';
+    apiKey = environment.themoviedbKey;
+    endpoint = environment.themoviedbAPI;
 
     constructor(private http: HttpClient) { }
 
@@ -60,6 +61,14 @@ export class MovieService {
 
     rated(page: number = 1): Observable<any> {
         return this.http.get(`${this.endpoint}/movie/top_rated?api_key=${this.apiKey}&language=es&page=${page}`);
+    }
+
+    playing(page: number = 1): Observable<any> {
+        return this.http.get(`${this.endpoint}/movie/now_playing?api_key=${this.apiKey}&language=es&page=${page}`);
+    }
+
+    upcoming(page: number = 1): Observable<any> {
+        return this.http.get(`${this.endpoint}/movie/upcoming?api_key=${this.apiKey}&language=es&page=${page}`);
     }
 
     details(id: number, type: string = 'movie'): Observable<any> {

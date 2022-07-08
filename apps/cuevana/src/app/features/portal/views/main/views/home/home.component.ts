@@ -3,6 +3,7 @@ import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieService } from '@cuevana-commons';
+import { Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
 @Component({
@@ -11,12 +12,9 @@ import { delay } from 'rxjs/operators';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  trending = [];
-  rated = [];
+  tagActive: string = 'popular';
   popular: any = {};
-  isLoadingTrend = false;
   isLoadingPopular = false;
-  isLoadingRated = false;
 
   constructor(
     private location: Location,
@@ -25,41 +23,8 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.trendingMovies();
-    this.ratedMovies();
-
     const page = +this.activatedRoute.snapshot.queryParamMap.get('page');
     this.goToPage(page || 1);
-  }
-
-  trendingMovies(): void {
-    this.isLoadingTrend = true;
-    this.movieService.trending()
-      .pipe(
-        delay(2000)
-      )
-      .subscribe({
-        next: res => {
-          this.trending = res.results.slice(0, 7);
-          this.isLoadingTrend = false;
-        },
-        error: () => this.isLoadingTrend = false
-      });
-  }
-
-  ratedMovies(): void {
-    this.isLoadingRated = true;
-    this.movieService.rated()
-      .pipe(
-        delay(2000)
-      )
-      .subscribe({
-        next: res => {
-          this.rated = res.results.slice(0, 9);
-          this.isLoadingRated = false;
-        },
-        error: () => this.isLoadingRated = false
-      });
   }
 
   previousPage(): void {
@@ -76,7 +41,9 @@ export class HomeComponent implements OnInit {
 
   goToPage(page: number): void {
     this.isLoadingPopular = true;
-    this.movieService.popular(page)
+
+    // Ejecución dinámica de un método
+    this.movieService[this.tagActive](page)
       .pipe(
         delay(2000)
       )
@@ -96,12 +63,10 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  dragstart(event): void {
-    console.log('dragstart', event);
-  }
-
-  dragend(event): void {
-    console.log('** dragend', event);
-  }
+  goToTag(tag: string): void {
+    console.log(tag);
+    this.tagActive = tag;
+    this.goToPage(1);
+  }  
 
 }

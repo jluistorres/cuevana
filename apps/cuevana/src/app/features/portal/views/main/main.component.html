@@ -2,7 +2,7 @@
   [class.d-none]="isLoadingTrend">
   <div class="carousel-inner">
     <div class="carousel-item" *ngFor="let item of trending;let i=index" [class.active]="i == 0"
-      (dragstart)="dragstart($event)" (dragend)="dragend($event)" draggable="true">
+      data-bs-interval="10000">
       <div class="container">
         <div class="row">
           <div class="col">
@@ -49,50 +49,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-9">
-      <section class="home-movies">
-        <div class="Top">
-          <h2 class="Title">Películas Online</h2>
-          <div class="btnstp">
-            <a data-tab="tab-1" class="Button STPb Current">ÚLTIMAS</a>
-            <a data-tab="tab-2" class="Button STPb">ESTRENOS</a>
-            <a data-tab="tab-3" class="Button STPb">RANKING</a>
-            <a data-tab="tab-4" class="Button STPb">MAS VISTAS</a>
-          </div>
-        </div>
-      </section>
-      <div class="tab">
-        <div class="row" *ngIf="!isLoadingPopular">
-          <div class="col-sm-3 col-6 mb-3" *ngFor="let item of popular.results">
-            <app-card-movie [movie]="item"></app-card-movie>
-          </div>
-        </div>
-        <ng-container *ngIf="isLoadingPopular">
-          <div class="row">
-            <div class="col-sm-3 col-6 mb-3" *ngFor="let item of [].constructor(12)">
-              <app-skeleton height="298px" radius="0.5em"></app-skeleton>
-              <div class="text-center mt-3">
-                <app-skeleton height="15px" radius="0.5em" class="w-75 d-inline-block"></app-skeleton>
-              </div>
-            </div>
-          </div>
-        </ng-container>
-        <nav class="navigation pagination">
-          <div class="nav-links">
-            <a class="prev page-numbers" (click)="previousPage()">
-              <i class="fa fa-arrow-left"></i>
-            </a>
-            <!-- <a class="page-link">1</a> -->
-            <a class="page-link current">{{popular.page || 1 | number: '0.0-0'}}</a>
-            <!-- <a class="page-link">3</a>
-          <a class="page-link">4</a> -->
-            <span class="extend">...</span>
-            <a class="page-link" (click)="goToPage(popular.total_pages)">{{popular.total_pages || 1 | number: '0.0-0'}}</a>
-            <a class="next page-numbers" (click)="nextPage()">
-              <i class="fa fa-arrow-right"></i>
-            </a>
-          </div>
-        </nav>
-      </div>
+      <router-outlet></router-outlet>
     </div>
     <div class="col-md-3">
       <div class="widget-title">TOP ESTRENOS</div>

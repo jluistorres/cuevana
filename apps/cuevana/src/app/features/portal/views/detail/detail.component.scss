@@ -24,7 +24,7 @@
     object-position: 50% 50% !important;
     opacity: 0.2;
 }
-.title {
+.title_movie {
     font-size: 2.25rem;
     color: #fff;
     font-weight: 700;
@@ -42,7 +42,6 @@
     background-color: rgba(0, 0, 0, 1);
     width: 100%;
     height: 550px;
-    margin-top: 1.25rem;
     cursor: pointer;
 }
 .video-frame::before {
@@ -55,6 +54,56 @@
     transform: translate(-50%, -50%);
     color: #fff;
     z-index: 9;
+}
+
+.TPlayerNv {
+    background-color: rgba(61, 79, 145, 0.5);
+    border-radius: 3px 3px 0 0;
+    padding: 0.7rem 0.7rem 0;
+    position: relative;
+    margin-top: 2rem;
+    margin-bottom: 0;
+
+    & > li {
+        display: inline-block;
+        vertical-align: top;
+        margin-right: 0.3rem;
+        position: relative;
+        margin-bottom: 0.7rem;
+        font-size: 0.9rem;
+
+        &.actives {
+            background-color: #007aff;
+        }
+
+        & > div {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            position: relative;
+            white-space: nowrap;
+            line-height: 1rem;
+            border-radius: 3px;
+            cursor: pointer;
+            gap: 7px;
+
+            img {
+                width: 20px;
+            }
+
+            .fa {
+                background-color: rgba(8, 15, 40, 0.5);
+                width: 1.25rem;
+                height: 1.25rem;
+                border-radius: 3px;
+                text-align: center;
+                line-height: 1.4rem;
+                color: #fff;
+                margin: 0.3rem 0.5rem 0 1rem;
+                font-size: 0.75rem;
+            }
+        }
+    }
 }
 
 // actores

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MovieService } from '@cuevana-commons';
-import { Subscription } from 'rxjs';
+import { debounceTime, delay, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-card-movie',
@@ -22,17 +22,16 @@ export class CardMovieComponent implements OnInit {
     this.leave();
 
     if (!this.details) {
-      this.subscription = this.movieService.details(this.movie.id, this.movie.media_type).subscribe(res => {
-        this.details = res;
-      });
+      this.subscription = this.movieService.details(this.movie.id, this.movie.media_type)
+        .pipe(debounceTime(1000))
+        .subscribe(res => {
+          this.details = res;
+        });
     }
   }
 
   leave() {
-    // console.log('leave');
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+    this.subscription?.unsubscribe();
   }
 
 }

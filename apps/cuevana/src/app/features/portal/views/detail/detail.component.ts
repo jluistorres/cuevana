@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieService } from '@cuevana-commons';
-import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-detail',
@@ -31,11 +30,8 @@ export class PortalDetailComponent implements OnInit {
     });
 
     this.movieService.actors(id).subscribe(res => {
-      this.actors = res.cast.slice(0, 6);
+      this.actors = res.cast;
     });
-
-    // forkJoin([]).subscribe(results => {
-    // });
   }
 
 }

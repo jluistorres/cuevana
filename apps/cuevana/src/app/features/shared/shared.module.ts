@@ -1,16 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from "@angular/core";
+import { RouterModule } from '@angular/router';
 import { NoFoundComponent } from './views/no-found/no-found.component';
 
-const components = [
-    NoFoundComponent
-];
-
 @NgModule({
-    imports: [CommonModule],
-    exports: [...components],
+    imports: [
+        CommonModule,
+        RouterModule
+    ],
     declarations: [
-        ...components
+        NoFoundComponent
     ]
 })
 export class CuevanaSharedModule { }

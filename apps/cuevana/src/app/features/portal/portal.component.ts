@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { GeneralService } from './commons/services/general.service';
 
 @Component({
   selector: 'app-portal',
@@ -8,10 +9,15 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PortalComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private generalService: GeneralService
+  ) { }
 
   ngOnInit() {
-
+    const data = this.activatedRoute.snapshot.data;
+    console.log("Data extraida del resolver", data);
+    this.generalService.$genres = data.genres;
   }
 
 }
