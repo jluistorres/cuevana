@@ -19,7 +19,7 @@ export class AuthSignInComponent implements OnInit {
     private router: Router,
     private cRef: ChangeDetectorRef
   ) {
-    this.form = fb.group({
+    this.form = this.fb.group({
       tipodoc: ['DNI', Validators.required],
       numdoc: [null, [Validators.required, Validators.minLength(8)]],
       password: [null]

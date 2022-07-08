@@ -1,3 +1,9 @@
+$blue: #1e2747 !default;
+
+:root {
+    --bs-primary: $blue;
+}
+
 @import "~bootstrap/scss/bootstrap";
 @import "~font-awesome/css/font-awesome.css";
 @import "~animate.css/animate.min.css";
@@ -19,7 +25,7 @@ body.open {
 // Scrolls
 @media (min-width: 1200px) {
     ::-webkit-scrollbar-track {
-        background-color: #1e2747;
+        background-color: $blue;
     }
     ::-webkit-scrollbar {
         width: 0.7rem;
@@ -298,7 +304,7 @@ button,
 .nav-links,
 .nav-links a,
 .nav-links span {
-    background-color: #1e2747;
+    background-color: $blue;
     display: inline-block;
     vertical-align: top;
     border-radius: 5rem;
@@ -380,7 +386,7 @@ button,
     top: 100%;
     margin-top: 0.5rem;
     padding: 1rem;
-    background-color: #1e2747;
+    background-color: $blue;
     border-radius: 0.5rem;
     max-height: 250px;
     overflow: auto;
