@@ -9,7 +9,6 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ListMoviesComponent } from './components/list-movies/list-movies.component';
 import { SkeletonComponent } from './components/skeleton/skeleton.component';
-import { GeneralService } from './services/general.service';
 
 const components = [
     HeaderComponent,
