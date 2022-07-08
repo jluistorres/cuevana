@@ -2,7 +2,7 @@ import { Component, ElementRef, HostBinding, HostListener, OnInit, ViewChild } f
 import { FormControl } from '@angular/forms';
 import { NavigationStart, Router, Event, ActivatedRoute } from '@angular/router';
 import { MovieService } from '@cuevana-commons';
-import { fromEvent, of, throwError } from 'rxjs';
+import { of } from 'rxjs';
 import { map, filter, debounceTime, distinctUntilChanged, switchMap, catchError, tap } from 'rxjs/operators';
 
 @Component({
@@ -32,13 +32,17 @@ export class HeaderComponent implements OnInit {
       .pipe(
         tap(() => {
           this.listSearch = [];
-          this.isLoadingSearch = false;          
+          this.isLoadingSearch = false;
+          this.isShow = false;
         })
 
         // Si la longitud del carácter es mayor que 1
-        , filter(value => value.length > 1)
+        , filter(value => value?.length > 1)
 
-        , tap(() => this.isLoadingSearch = true)
+        , tap(() => {
+          this.isShow = true;
+          this.isLoadingSearch = true;
+        })
 
         // Tiempo en milisegundos entre eventos clave
         , debounceTime(1000)
@@ -64,9 +68,10 @@ export class HeaderComponent implements OnInit {
     this.events();
   }
 
-  submit(form) {
-    console.log(form);
-    this.router.navigate(['/search'], { queryParams: form });
+  submit() {
+    this.listSearch = [];
+    this.router.navigate(['/buscar'], { queryParams: { s: this.searchControl.value } });
+    this.searchControl.reset();
   }
 
   /* @HostListener('document:click', ['$event.target'])

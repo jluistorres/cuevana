@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthenticatedGuard, InitResolver } from '@cuevana-commons';
+import { InitResolver } from '@cuevana-commons';
 import { PortalComponent } from './portal.component';
-import { AdultsComponent } from './views/adults/adults.component';
 import { PortalDetailComponent } from './views/detail/detail.component';
-import { PortalSearchComponent } from './views/search/search.component';
 
 const routes: Routes = [
     {
@@ -17,18 +15,8 @@ const routes: Routes = [
                 loadChildren: () => import('./views/main/main.module').then(m => m.PortalMainModule)
             },
             {
-                path: 'detail/:id/:type',
+                path: 'detalle/:id/:type',
                 component: PortalDetailComponent
-            },
-
-            {
-                path: 'search',
-                component: PortalSearchComponent
-            },
-            {
-                path: 'adult',
-                canActivate: [AuthenticatedGuard],
-                component: AdultsComponent
             },
         ]
     },

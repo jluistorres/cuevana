@@ -4,8 +4,6 @@ import { PortalComponent } from './portal.component';
 import { PortalRoutingModule } from './portal-routing.module';
 import { PortalCommonsModule } from './commons/commons.module';
 import { PortalDetailComponent } from './views/detail/detail.component';
-import { PortalSearchComponent } from './views/search/search.component';
-import { AdultsComponent } from './views/adults/adults.component';
 
 @NgModule({
   imports: [
@@ -15,9 +13,7 @@ import { AdultsComponent } from './views/adults/adults.component';
   ],
   declarations: [
     PortalComponent,    
-    PortalDetailComponent,    
-    PortalSearchComponent,
-    AdultsComponent
+    PortalDetailComponent,        
   ]
 })
 export class PortalModule { }

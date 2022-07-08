@@ -1,5 +1,5 @@
 <div class="post" (mouseenter)="enter()" (mouseleave)="leave()">
-  <a [routerLink]="['/detail', movie.id, movie.media_type || 'movie']">
+  <a [routerLink]="['/detalle', movie.id, movie.media_type || 'movie']">
     <div class="image">
       <span class="year">{{movie.release_date || movie.first_air_date || movie.air_date | date: 'yyyy'}}</span>
       <figure>

@@ -13,7 +13,11 @@ export class PortalMainComponent implements OnInit {
   isLoadingTrend = false;
   isLoadingRated = false;
 
-  constructor(private movieService: MovieService) { }
+  constructor(
+    private movieService: MovieService
+  ) {
+    
+  }
 
   ngOnInit() {
     this.trendingMovies();

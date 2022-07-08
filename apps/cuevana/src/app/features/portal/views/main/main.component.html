@@ -1,50 +1,52 @@
-<div id="carousel-main" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000"
-  [class.d-none]="isLoadingTrend">
-  <div class="carousel-inner">
-    <div class="carousel-item" *ngFor="let item of trending;let i=index" [class.active]="i == 0"
-      data-bs-interval="10000">
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <div class="carousel-container">
-              <a>
-                <div class="title">
-                  {{item.title || item.name}}
-                  <span class="Qlty align-middle">{{item.media_type == 'movie'? 'PELÍCULA': 'SERIE'}}</span>
-                </div>
-              </a>
-              <p class="Info">
-                <span class="Vote">{{item.vote_average}}</span>
-                <span class="Time">1h 56m</span>
-                <span class="Date">{{item.release_date | date: 'yyyy'}}</span>
-                <span class="Qlty">HD</span>
-              </p>
-              <p class="description">{{item.overview}}</p>
-              <a class="btn btn-primary btn-lg btn-rounded" [routerLink]="['/detail', item.id, item.media_type]">
-                <i class="fa fa-play"></i> Ver {{item.media_type == 'movie'? 'Película': 'Serie'}}
-              </a>
+<div id="carousel-wrapper">
+  <div id="carousel-main" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000"
+    [class.d-none]="isLoadingTrend">
+    <div class="carousel-inner">
+      <div class="carousel-item" *ngFor="let item of trending;let i=index" [class.active]="i == 0"
+        data-bs-interval="10000">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="carousel-container">
+                <a>
+                  <div class="title">
+                    {{item.title || item.name}}
+                    <span class="Qlty align-middle">{{item.media_type == 'movie'? 'PELÍCULA': 'SERIE'}}</span>
+                  </div>
+                </a>
+                <p class="Info">
+                  <span class="Vote">{{item.vote_average}}</span>
+                  <span class="Time">1h 56m</span>
+                  <span class="Date">{{item.release_date | date: 'yyyy'}}</span>
+                  <span class="Qlty">HD</span>
+                </p>
+                <p class="description">{{item.overview}}</p>
+                <a class="btn btn-primary btn-lg btn-rounded" [routerLink]="['/detalle', item.id, item.media_type]">
+                  <i class="fa fa-play"></i> Ver {{item.media_type == 'movie'? 'Película': 'Serie'}}
+                </a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <img src="https://image.tmdb.org/t/p/w1280{{item.backdrop_path}}" alt="" draggable="false">
-    </div>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <ol class="carousel-indicators">
-          <ng-container *ngFor="let item of trending;let i=index">
-            <li data-bs-target="#carousel-main" [attr.data-bs-slide-to]="i" [class.active]="i == 0"></li>
-          </ng-container>
-        </ol>
+        <img src="https://image.tmdb.org/t/p/w1280{{item.backdrop_path}}" alt="" draggable="false">
       </div>
     </div>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <ol class="carousel-indicators">
+            <ng-container *ngFor="let item of trending;let i=index">
+              <li data-bs-target="#carousel-main" [attr.data-bs-slide-to]="i" [class.active]="i == 0"></li>
+            </ng-container>
+          </ol>
+        </div>
+      </div>
+    </div>
   </div>
+  <ng-container *ngIf="isLoadingTrend">
+    <app-skeleton height="475px" class="mb-3"></app-skeleton>
+  </ng-container>
 </div>
-<ng-container *ngIf="isLoadingTrend">
-  <app-skeleton height="475px" class="mb-3"></app-skeleton>
-</ng-container>
 <!-- Sections -->
 <div class="container">
   <div class="row">
