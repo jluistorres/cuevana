@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --configuration cuevana production --base-href /cuevana/ --deploy-url /cuevana/app/",
+    "build": "ng build cuevana --configuration production --base-href /cuevana/ --deploy-url /cuevana/app/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
