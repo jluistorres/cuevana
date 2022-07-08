@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build cuevana --configuration production --base-href /cuevana/ --deploy-url /cuevana/app/",
+    "build": "ng build cuevana --configuration production --base-href /cuevana/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -21,6 +21,7 @@
     "@angular/router": "^14.0.5",
     "@popperjs/core": "^2.11.5",
     "animate.css": "^4.1.1",
+    "autoprefixer": "10.4.5",
     "bootstrap": "^5.1.3",
     "font-awesome": "^4.7.0",
     "rxjs": "~7.5.5",

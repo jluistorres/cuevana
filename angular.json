@@ -18,7 +18,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/app",
+            "outputPath": "dist/cuevana",
             "resourcesOutputPath": "resources",
             "index": "apps/cuevana/src/index.html",
             "main": "apps/cuevana/src/main.ts",
